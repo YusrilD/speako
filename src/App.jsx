@@ -3,14 +3,21 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 // src/App.jsx
+// export default function App() {
+//   return (
+//     <div className="min-h-dvh grid place-items-center bg-neutral-950 text-neutral-100">
+//       <h1 className="text-3xl md:text-4xl font-bold">Speako ✅</h1>
+//       {/* TODO: nanti diisi TeleprompterPage */}
+//     </div>
+//   );
+// }
+
+import Teleprompter from "./pages/TelePrompter.jsx";
+
 export default function App() {
-  return (
-    <div className="min-h-dvh grid place-items-center bg-neutral-950 text-neutral-100">
-      <h1 className="text-3xl md:text-4xl font-bold">Speako ✅</h1>
-      {/* TODO: nanti diisi TeleprompterPage */}
-    </div>
-  );
+  return <Teleprompter />;
 }
+
 
 
 
