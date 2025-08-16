@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import appIcon from '../assets/app_icon.webp'
 
-import { PauseIcon, PlayIcon, ArrowLeftIcon, ArrowRightIcon } from "../icons";
+import { PauseIcon, PlayIcon, ArrowLeftIcon, ArrowRightIcon, ResetIcon } from "../icons";
 
 // Live Preview with editable panel that can be minimized (no Tailwind; inline styles)
 export default function PreviewTeleprompter() {
@@ -71,7 +71,7 @@ export default function PreviewTeleprompter() {
     row: { display: "flex", alignItems: "center", gap: 8, marginBottom: 12 },
     bottomRow: {
       display: "flex",
-      alignItems: "center",
+      alignItems: "stretch",
       justifyContent: "space-between",
       // gap: 8,
       marginTop: 12
@@ -185,11 +185,18 @@ export default function PreviewTeleprompter() {
       </div>
 
       <div style={styles.bottomRow}>
-        <h1 class="flex-1"></h1>
         <div class="flex-1">
           <div className="flex gap-2">
-
-            <button onClick={resetScroll} style={styles.btn(false)}> Reset</button>
+            <button onClick={resetScroll} style={styles.btn(false)}> <ResetIcon size={20} color="#fff" /> </button>
+            <button onClick={() => setRunning(v => !v)} style={{ ...styles.btn(!running), ...(running ? styles.danger : {}) }}>
+              {running ? <PauseIcon size={20} color="#fff" /> : <PlayIcon size={20} color="#fff" />}
+            </button>
+            <button onClick={() => setMirrored(m => !m)} style={styles.btn(false)}>{mirrored ? <ArrowRightIcon size={20} color="#fff" /> : <ArrowLeftIcon size={20} color="#fff" />}</button>
+          </div>
+        </div>
+        <div class="flex-1">
+          <div className="flex gap-2">
+            <button onClick={resetScroll} style={styles.btn(false)}> <ResetIcon size={20} color="#fff" /> </button>
             <button onClick={() => setRunning(v => !v)} style={{ ...styles.btn(!running), ...(running ? styles.danger : {}) }}>
               {running ? <PauseIcon size={20} color="#fff" /> : <PlayIcon size={20} color="#fff" />}
             </button>
