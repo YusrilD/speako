@@ -5,3 +5,5 @@ export { default as ResetIcon } from "./ResetIcon.jsx";
 
 export { default as ArrowLeftIcon } from "./ArrowLeftIcon.jsx";
 export { default as ArrowRightIcon } from "./ArrowRightIcon.jsx";
+
+export { default as AlignLeftIcon } from "./AlignLeftIcon.jsx";

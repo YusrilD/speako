@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import appIcon from '../assets/app_icon.webp'
 
-import { PauseIcon, PlayIcon, ArrowLeftIcon, ArrowRightIcon, ResetIcon } from "../icons";
+import { PauseIcon, PlayIcon, ArrowLeftIcon, ArrowRightIcon, ResetIcon, AlignLeftIcon } from "../icons";
 
 // Live Preview with editable panel that can be minimized (no Tailwind; inline styles)
 export default function PreviewTeleprompter() {
@@ -9,6 +9,7 @@ export default function PreviewTeleprompter() {
     Array.from({ length: 80 }, (_, i) => `Baris contoh ke-${i + 1}. `.repeat(8)).join("\n")
   );
   const [mirrored, setMirrored] = useState(false);
+  const [alignLeft, setAlignLeft] = useState(false);
   const [speed, setSpeed] = useState(10); // px/s
   const [running, setRunning] = useState(false);
   const [showEditor, setShowEditor] = useState(true);
@@ -87,7 +88,7 @@ export default function PreviewTeleprompter() {
     stageWrap: (show) => ({ width: show ? "60%" : "100%", transition: "all .3s ease" }),
     stage: { height: "70vh", overflowY: "auto", background: "#111213", border: "1px solid #262626", borderRadius: 12, padding: 24, lineHeight: 1.6 },
     label: { fontSize: 12, opacity: .7, margin: "-4px 0 8px", padding: "0 4px" },
-    inner: (mirrored) => ({ maxWidth: 800, margin: "0 auto", fontSize: 32, transform: mirrored ? "scaleX(-1)" : "none" }),
+    inner: (mirrored, alignLeft) => ({ textAlign: alignLeft ? "left" : "center", maxWidth: 800, margin: "0 auto", fontSize: 32, transform: mirrored ? "scaleX(-1)" : "none" }),
     p: { marginBottom: 18 },
     floating: { position: "fixed", left: 16, bottom: 16, padding: "8px 12px", borderRadius: 8, border: "1px solid #262626", background: "#262626", color: "#e5e5e5", cursor: "pointer", boxShadow: "0 6px 20px rgba(0,0,0,.35)" }
   };
@@ -174,7 +175,7 @@ export default function PreviewTeleprompter() {
         <div style={styles.stageWrap(showEditor)}>
           <div ref={stageRef} style={styles.stage} aria-label="Teleprompter stage">
             <div style={styles.label}>📜 Teleprompter</div>
-            <div style={styles.inner(mirrored)}>
+            <div style={styles.inner(mirrored, alignLeft)}>
               {text.split("\n").map((line, i) => (
                 <p key={i} style={styles.p}>{line || "\u00A0"}</p>
               ))}
@@ -188,9 +189,7 @@ export default function PreviewTeleprompter() {
         <div class="flex-1">
           <div className="flex gap-2">
             <button onClick={resetScroll} style={styles.btn(false)}> <ResetIcon size={20} color="#fff" /> </button>
-            <button onClick={() => setRunning(v => !v)} style={{ ...styles.btn(!running), ...(running ? styles.danger : {}) }}>
-              {running ? <PauseIcon size={20} color="#fff" /> : <PlayIcon size={20} color="#fff" />}
-            </button>
+            <button onClick={() => setAlignLeft(l => !l)} style={styles.btn(false)}>{alignLeft ? "B" : <AlignLeftIcon size={20} color="#fff" />}</button>
             <button onClick={() => setMirrored(m => !m)} style={styles.btn(false)}>{mirrored ? <ArrowRightIcon size={20} color="#fff" /> : <ArrowLeftIcon size={20} color="#fff" />}</button>
           </div>
         </div>
