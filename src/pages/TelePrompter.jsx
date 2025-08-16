@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import PlayIcon from "../icons/PlayIcon";
-import PauseIcon from "../icons/PauseIcon";
 import appIcon from '../assets/app_icon.webp'
 
-// import { PauseIcon, PlayIcon } from "../icons";
+import { PauseIcon, PlayIcon, ArrowLeftIcon, ArrowRightIcon } from "../icons";
 
 // Live Preview with editable panel that can be minimized (no Tailwind; inline styles)
 export default function PreviewTeleprompter() {
@@ -195,7 +193,7 @@ export default function PreviewTeleprompter() {
             <button onClick={() => setRunning(v => !v)} style={{ ...styles.btn(!running), ...(running ? styles.danger : {}) }}>
               {running ? <PauseIcon size={20} color="#fff" /> : <PlayIcon size={20} color="#fff" />}
             </button>
-            <button onClick={() => setMirrored(m => !m)} style={styles.btn(false)}>{mirrored ? "Unmirror" : "Mirror"}</button>
+            <button onClick={() => setMirrored(m => !m)} style={styles.btn(false)}>{mirrored ? <ArrowRightIcon size={20} color="#fff" /> : <ArrowLeftIcon size={20} color="#fff" />}</button>
           </div>
         </div>
         <div>
