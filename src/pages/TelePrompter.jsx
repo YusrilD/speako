@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import PlayIcon from "../icons/PlayIcon";
 import PauseIcon from "../icons/PauseIcon";
+import appIcon from '../assets/app_icon.webp'
+
 // import { PauseIcon, PlayIcon } from "../icons";
 
 // Live Preview with editable panel that can be minimized (no Tailwind; inline styles)
@@ -105,8 +107,9 @@ export default function PreviewTeleprompter() {
 
   return (
     <div style={styles.page}>
-      <div style={styles.row}>
-        <h1 style={{ fontSize: 18, fontWeight: 600, marginRight: "auto" }}>Speako — Preview</h1>
+      <div class="flex items-center gap-3">
+        <img class="h-10 w-10" src={appIcon} alt="AppIcon" />
+        <h1 class="font-serif text-3xl font-semibold">Speak'O!</h1>
       </div>
 
       <section className="flex flex-wrap items-center gap-3 py-3">
