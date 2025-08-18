@@ -3,11 +3,8 @@ import appIcon from '../assets/app_icon.webp'
 
 import { PauseIcon, PlayIcon, ArrowLeftIcon, ArrowRightIcon, ResetIcon, AlignLeftIcon } from "../icons";
 
-// Live Preview with editable panel that can be minimized (no Tailwind; inline styles)
 export default function PreviewTeleprompter() {
-  const [text, setText] = useState(
-    Array.from({ length: 80 }, (_, i) => `Baris contoh ke-${i + 1}. `.repeat(8)).join("\n")
-  );
+  const [text, setText] = useState("");
   const [mirrored, setMirrored] = useState(false);
   const [alignLeft, setAlignLeft] = useState(false);
   const [speed, setSpeed] = useState(10); // px/s
@@ -107,8 +104,8 @@ export default function PreviewTeleprompter() {
   return (
     <div style={styles.page}>
       <div class="flex items-center gap-3">
-        <img class="h-10 w-10" src={appIcon} alt="AppIcon" />
-        <h1 class="font-serif text-3xl font-semibold">Speak'O!</h1>
+        {/* <img class="h-10 w-10" src={appIcon} alt="AppIcon" /> */}
+        <h1 class="font-serif text-2xl font-medium">Speak'o Teleprompter</h1>
       </div>
 
       <section className="flex flex-wrap items-center gap-3 py-3">
@@ -116,49 +113,7 @@ export default function PreviewTeleprompter() {
         {!showEditor && (
           <button onClick={() => setShowEditor(true)} className="px-2.5 h-8 rounded-md bg-neutral-800 hover:bg-neutral-700 text-sm font-medium" title="Tampilkan Editor">✏️ Show Editor</button>
         )}
-
-        {/* <div className="flex gap-2 ms-auto">
-          <label className="pe-5 pt-0.5 opacity-80">Speed Controller</label>
-          <button
-            type="button"
-            onClick={decSpeed}
-            className="px-2.5 h-8 rounded-md bg-neutral-800 hover:bg-neutral-700 text-sm font-medium"
-            aria-label="Kurangi kecepatan"
-            title={`- ${SPEED_STEP} px/s`}
-          >
-            −
-          </button>
-
-          <input
-            type="range"
-            min={SPEED_MIN}
-            max={SPEED_MAX}
-            step={SPEED_STEP}
-            value={Number(speed)}
-            onChange={(e) => setSpeedClamped(e.target.value)}
-            className="w-32 accent-emerald-500"
-            aria-label="Scroll speed (px/s)"
-          />
-
-          <button
-            type="button"
-            onClick={incSpeed}
-            className="px-2.5 h-8 rounded-md bg-neutral-800 hover:bg-neutral-700 text-sm font-medium"
-            aria-label="Tambah kecepatan"
-            title={`+ ${SPEED_STEP} px/s`}
-          >
-            +
-          </button>
-
-          <span className="text-sm tabular-nums pt-1 ps-1 opacity-75 text-center">
-            {Number(speed)} px/s
-          </span>
-        </div>
-
-        {/* <div className="ms-auto text-xs opacity-60">Tip: F11 untuk fullscreen</div> */}
       </section>
-
-
       <div style={styles.main(showEditor)}>
         {/* Editor Panel */}
         <div style={styles.editorWrap(showEditor)} aria-hidden={!showEditor}>
@@ -171,7 +126,6 @@ export default function PreviewTeleprompter() {
           </div>
         </div>
 
-        {/* Stage */}
         <div style={styles.stageWrap(showEditor)}>
           <div ref={stageRef} style={styles.stage} aria-label="Teleprompter stage">
             <div style={styles.label}>📜 Teleprompter</div>
